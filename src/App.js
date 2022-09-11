@@ -1,23 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import Adduser from './components/Adduser';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [allInfo,setInfo] = useState([])
+  const [userInfo,setUserInfo] = useState({})
+  const getForm =(info)=>{
+    setUserInfo(info)
+  }
+  console.log(userInfo)
+  // 
+  useEffect(()=>{setInfo([...allInfo,userInfo])},userInfo)
+
+  console.log(allInfo)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Adduser getForm = {getForm} id={allInfo.length+1}/>
+      {}
     </div>
   );
 }

@@ -3,9 +3,21 @@ import { useState } from 'react'
 
 const Adduser = ({getForm},id) => {
     const [userInfo,setInfo] = useState({})
+    const [prevState,setPrevState] = useState({})
     const submition =(e)=>{
+
+        if(userInfo.userName == null){
+            console.log(prevState)
+           setInfo({userName:prevState.userName}) 
+        }
         e.preventDefault();
         getForm(userInfo);
+        prevSet(userInfo)
+        console.log(prevState)
+    }
+    const prevSet =(inf)=>{
+        setPrevState(inf)
+        setInfo({})
     }
     
     //useEffect(()=>{setInfo({id:id})},[])
@@ -24,6 +36,7 @@ const Adduser = ({getForm},id) => {
             type="text"
             name="userName"
             id= "userName"
+            value={userInfo.userName}
             onChange={handleChange}
             />
             <input 

@@ -1,17 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 import Adduser from './components/Adduser';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function App() {
   const [allInfo,setInfo] = useState([])
   const [userInfo,setUserInfo] = useState({})
   const getForm =(info)=>{
     setUserInfo(info)
+    setInfo([...allInfo,userInfo])
+    console.log(info)
+    console.log("--------------------------------")
+    
   }
-  console.log(userInfo)
-  // 
-  useEffect(()=>{setInfo([...allInfo,userInfo])},userInfo)
+
+  
 
   console.log(allInfo)
   return (
@@ -21,5 +24,31 @@ function App() {
     </div>
   );
 }
+
+// class App extends React.Component{
+//   constructor(props){
+//   super(props)
+//   this.state = {
+//     userInfo:[]
+//   }
+//   }
+//   getForm =(info)=>{
+//     console.log(this.state.userInfo)
+//     console.log(info)
+//     this.setState(
+//        {userInfo:[...this.state.userInfo,info]}
+//     )
+    
+//   }
+
+//   render(){
+//       return (
+//     <div className="App">
+//       <Adduser getForm = {this.getForm} />
+//     </div>
+//   );
+
+//   }
+// }
 
 export default App;

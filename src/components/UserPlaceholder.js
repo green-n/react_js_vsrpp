@@ -1,11 +1,14 @@
 import React from 'react'
+import { UserElement } from './UserElement'
 
-const UserPlaceholder = (props) => {
+const UserPlaceholder = ({Users}) => {
 
-    console.log(props)
+    
 
     return (
-    <div>UserPlaceholder</div>
+    <>
+      {Users.map((el,indx) => <UserElement User={el} key={indx} />)}
+    </>
   )
 }
 

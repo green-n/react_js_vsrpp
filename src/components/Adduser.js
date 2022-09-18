@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react'
+import { Button } from '@mui/material'
 
 const Adduser = ({getForm},id) => {
     const [userInfo,setInfo] = useState({})
@@ -41,7 +42,7 @@ const Adduser = ({getForm},id) => {
     <div>
 
         <form onSubmit={submition}>
-        <button type='submit'>ff</button>
+        <Button variant="contained" color ="secondary" size="medium" type='submit'>Add user</Button>
             <input 
             type="text"
             name="userName"

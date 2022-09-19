@@ -3,8 +3,13 @@ import Adduser from '../components/Adduser'
 import UserPlaceholder from '../components/UserPlaceholder';
 import React, { useEffect, useState } from 'react';
 
-function UserManagementPage() {
+function UserManagementPage({returnInfo,state}) {
+  
+
   const [allInfo,setInfo] = useState([])
+
+  useEffect(()=>{setInfo(state)},[])
+
   const [userInfo,setUserInfo] = useState({})
   const getForm =(info)=>{
     info.id = allInfo.length
@@ -25,7 +30,7 @@ function UserManagementPage() {
   }
    
   // useEffect(()=>{setInfo(allInfo.filter((el)=>{return el!={}}))},[userInfo])
-  
+  useEffect(()=>{returnInfo(allInfo)},[allInfo])
 
   console.log(allInfo)
   return (

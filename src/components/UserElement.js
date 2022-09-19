@@ -7,7 +7,7 @@ export const UserElement = ({User,delt,id}) => {
     delt(User.email)
   } 
     console.log(User)
-    let res = `id: ${id}; Username: ${User.userName}; lastname: ${User.lastName}; email: ${User.email}.`
+    let res = `id: ${id}; Username: ${User.userName}; password: ${User.password}; email: ${User.email}.`
     console.log(delt)
   return (
     <>

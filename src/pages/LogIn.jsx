@@ -9,13 +9,13 @@ const style = {
 
 }
 
-const LogIn = () => {
-    const [setInfo,logInfo] = useState({})
+const LogIn = ({state}) => {
+    const [logInfo,setInfo] = useState({})
     const handleChange = (e) =>{
         
         const {name,value} = e.target
-        console.log(e.target.value)
-        // setInfo(Object.assign(logInfo,{[name]:value}))
+            
+        setInfo(Object.assign(logInfo,{[name]:value}))
     }
   return (
     <div className={style.FormLogIn}>
@@ -29,10 +29,12 @@ const LogIn = () => {
                  spacing={4}>
                     <InputLabel>Get into your account</InputLabel>
                     <TextField
-                    label="email" 
+                    label="email"
+                    name="email" 
                     onChange={handleChange}/>
                     <TextField 
                     label="password"
+                    name ="password"
                     onChange={handleChange} 
                     />
                     <Button>Log In</Button>

@@ -2,6 +2,10 @@
 import { useEffect, useState } from 'react'
 import { Button } from '@mui/material'
 
+const style = {
+    inputStyle:'bg-gray-50 w-{150px}  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500'
+}
+
 const Adduser = ({getForm},id) => {
     const [userInfo,setInfo] = useState({})
     const [prevState,setPrevState] = useState({})
@@ -13,7 +17,7 @@ const Adduser = ({getForm},id) => {
 
         if(userInfo.userName == null){alert("please enter user name")
         return 0}
-        if(userInfo.lastName == null){alert("please enter Lastname")
+        if(userInfo.password == null){alert("please enter Lastname")
         return 0}
         if(userInfo.email == null){alert("please enter email")
         return 0}
@@ -25,8 +29,11 @@ const Adduser = ({getForm},id) => {
         
        
     }
+
+    
     
     useEffect(()=>{setClean(false)},[userInfo])
+    
     const cleanForm = () =>{
         setClean(true)
     }
@@ -44,6 +51,7 @@ const Adduser = ({getForm},id) => {
         <form onSubmit={submition}>
         <Button variant="contained" color ="secondary" size="medium" type='submit'>Add user</Button>
             <input 
+            className={style.inputStyle}
             type="text"
             name="userName"
             id= "userName"
@@ -51,13 +59,15 @@ const Adduser = ({getForm},id) => {
             value={clear ?"" : userInfo.userName}
             />
             <input 
+            className={style.inputStyle}
             type="text"
-            name="lastName"
-            id= "lastName"
+            name="password"
+            id= "password"
             onChange={handleChange}
-            value={clear ?"" : userInfo.lastName}
+            value={clear ?"" : userInfo.password}
             />
             <input 
+            className={style.inputStyle}
             type="text"
             name="email"
             id= "emali"

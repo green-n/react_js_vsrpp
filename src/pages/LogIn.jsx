@@ -2,14 +2,17 @@ import React from 'react'
 import { TextField,Box,Button, InputLabel } from '@mui/material'
 import { useState } from 'react'
 import { Stack } from '@mui/system'
+import { Link,useNavigate } from 'react-router-dom'
 
 const style = {
     FormLogIn:'mx-auto text-center left-[45vw] top-[20vh] absolute max-w-[20vw] justify-center ',
-    StackClass:'bg-slate-50'
-
+    StackClass:'bg-slate-50',
+    TextStyle:'block top-[90vh] left-[45vw] absolute',
+    LinkStyle:'text-cyan-600'
 }
 
-const LogIn = ({state}) => {
+const LogIn = ({state,isLogedIn}) => {
+    let navigate = useNavigate();
     const [logInfo,setInfo] = useState({})
     const handleChange = (e) =>{
         
@@ -17,32 +20,56 @@ const LogIn = ({state}) => {
             
         setInfo(Object.assign(logInfo,{[name]:value}))
     }
-  return (
-    <div className={style.FormLogIn}>
-        <form >
-            <Box >
-                <Stack
-                 className={style.StackClass}
-                 direction="column"
-                 justifyContent="center"
-                 alignItems="center"
-                 spacing={4}>
-                    <InputLabel>Get into your account</InputLabel>
-                    <TextField
-                    label="email"
-                    name="email" 
-                    onChange={handleChange}/>
-                    <TextField 
-                    label="password"
-                    name ="password"
-                    onChange={handleChange} 
-                    />
-                    <Button>Log In</Button>
-                </Stack>
-            </Box>
-        </form>
+
+    const loggining =()=>{
+        let temp = state.find(({email})=> email == logInfo.email)
+
+        if(temp == undefined){
+            alert("this email doesn't exist")
+            return 2
+        }
+
         
-    </div>
+        console.log(temp)
+        if(temp.password != logInfo.password){
+            alert("wrong password")
+            return 1
+        }
+        
+            isLogedIn()
+            navigate('/')
+            return 0
+        
+    }
+  return (
+    <>
+        <div className={style.FormLogIn}>
+            <form >
+                <Box >
+                    <Stack
+                    className={style.StackClass}
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing={4}>
+                        <InputLabel>Get into your account</InputLabel>
+                        <TextField
+                        label="email"
+                        name="email" 
+                        onChange={handleChange}/>
+                        <TextField 
+                        label="password"
+                        name ="password"
+                        onChange={handleChange} 
+                        />
+                        <Button onClick={loggining}>Log In</Button>
+                    </Stack>
+                </Box>
+            </form>
+        </div>
+        
+        <p className={style.TextStyle}>Dont have account?<Link to="/register" className={style.LinkStyle}> Register...</Link></p>
+    </>
   )
 }
 

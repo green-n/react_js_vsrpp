@@ -2,10 +2,11 @@
 import Adduser from '../components/Adduser'
 import UserPlaceholder from '../components/UserPlaceholder';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function UserManagementPage({returnInfo,state}) {
   
-
+  let navigate = useNavigate();
   const [allInfo,setInfo] = useState([])
 
   useEffect(()=>{setInfo(state)},[])
@@ -37,6 +38,9 @@ function UserManagementPage({returnInfo,state}) {
     <div className="App">
       <Adduser getForm = {getForm} id={allInfo.length}/>
       <UserPlaceholder Users = {allInfo}  delt = {deleteElmByEmail}/>
+
+      <button onClick={()=>{navigate('/logIn')}}>logInTest</button>
+      
     </div>
   );
 }

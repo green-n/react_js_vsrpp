@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { TextField,Box,Button, InputLabel } from '@mui/material'
 import { useState } from 'react'
 import { Stack } from '@mui/system'
+import { useNavigate  } from "react-router-dom";
+
 
 const style = {
     FormLogIn:'mx-auto text-center left-[45vw] top-[20vh] absolute max-w-[20vw] justify-center ',
@@ -9,9 +11,10 @@ const style = {
 
 }
 
-const Register = ({state,returnInfo}) => {
+const Register = ({state,returnInfo,isLogedIn}) => {
     const [logInfo,setInfo] = useState({})
     const [clear,clean] = useState(false)
+    let navigate = useNavigate();
 
    
 
@@ -34,6 +37,8 @@ const Register = ({state,returnInfo}) => {
 
         tempState = [...tempState,logInfo]
         returnInfo(tempState)
+        isLogedIn()
+        navigate('/')
 
 
        

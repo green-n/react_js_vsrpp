@@ -12,6 +12,7 @@ function App() {
   }
   return (<>
       <Routes>
+        <Route exact path="/" element = { isNotLoged ? <Navigate to="/logIn"/> : <UserManagementPage state={state} returnInfo = {getStateFromComponent}/> } />
         <Route path ='/logIn' element={<LogIn state={state}/>}/>
       </Routes>
       {/* <Link to={{pathname: "/logIn"}} >take</Link> */}

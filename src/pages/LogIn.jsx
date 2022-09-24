@@ -3,6 +3,9 @@ import { TextField,Box,Button, InputLabel } from '@mui/material'
 import { useState } from 'react'
 import { Stack } from '@mui/system'
 import { Link,useNavigate } from 'react-router-dom'
+import { useDispatch,useSelector } from 'react-redux'
+import { logIn } from '../redux/actions'
+
 
 const style = {
     FormLogIn:'mx-auto text-center left-[45vw] top-[20vh] absolute max-w-[20vw] justify-center ',
@@ -11,9 +14,18 @@ const style = {
     LinkStyle:'text-cyan-600'
 }
 
-const LogIn = ({state,isLogedIn}) => {
+
+
+const LogIn = () => {
+
+    let state = useSelector(state => state.userInfo);
+
+    const dispatch = useDispatch()
+
+
     let navigate = useNavigate();
     const [logInfo,setInfo] = useState({})
+
     const handleChange = (e) =>{
         
         const {name,value} = e.target
@@ -36,7 +48,7 @@ const LogIn = ({state,isLogedIn}) => {
             return 1
         }
         
-            isLogedIn()
+            dispatch(logIn())
             navigate('/')
             return 0
         

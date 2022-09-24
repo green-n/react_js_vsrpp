@@ -3,6 +3,8 @@ import { TextField,Box,Button, InputLabel } from '@mui/material'
 import { useState } from 'react'
 import { Stack } from '@mui/system'
 import { useNavigate  } from "react-router-dom";
+import { useDispatch,useSelector } from 'react-redux'
+import { logIn,addUserInfo } from '../redux/actions'
 
 
 const style = {
@@ -11,9 +13,11 @@ const style = {
 
 }
 
-const Register = ({state,returnInfo,isLogedIn}) => {
+const Register = () => {
+    const dispatch = useDispatch()
     const [logInfo,setInfo] = useState({})
     const [clear,clean] = useState(false)
+    let tempState = useSelector(state => state.userInfo);
     let navigate = useNavigate();
 
    
@@ -23,7 +27,7 @@ const Register = ({state,returnInfo,isLogedIn}) => {
 
         if(!logInfo.email){alert("please enter email")
         return 0}
-        let tempState = state;
+        
         if(tempState.find(({email})=> email == logInfo.email)){
             alert("this email already taken")
 
@@ -35,9 +39,10 @@ const Register = ({state,returnInfo,isLogedIn}) => {
         if(!logInfo.password){alert("please enter password")
         return 0}
 
-        tempState = [...tempState,logInfo]
-        returnInfo(tempState)
-        isLogedIn()
+        // tempState = [...tempState,logInfo]
+        // returnInfo(tempState)
+        dispatch(addUserInfo(logInfo))
+        dispatch(logIn())
         navigate('/')
 
 

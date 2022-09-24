@@ -3,43 +3,44 @@ import Adduser from '../components/Adduser'
 import UserPlaceholder from '../components/UserPlaceholder';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux'
+import { logOut } from '../redux/actions'
 
 function UserManagementPage({returnInfo,state}) {
-  
-  let navigate = useNavigate();
-  const [allInfo,setInfo] = useState([])
+  const dispatch = useDispatch();
 
-  useEffect(()=>{setInfo(state)},[])
+  // let navigate = useNavigate();
+  // const allInfo = useSelector(state => state.userInfo)
 
-  const [userInfo,setUserInfo] = useState({})
-  const getForm =(info)=>{
-    info.id = allInfo.length
-    allInfo.find(({email})=> email == info.email)? alert("this email already taken, please choose another"):console.log("works ")
-    if(allInfo.find(({email})=> email == info.email))return 1
-    setUserInfo(info)
-    setInfo([...allInfo,info])
-    return 0
-  }
+  // useEffect(()=>{setInfo(state)},[])
 
-  const deleteElmByEmail =(emailForRemoval)=>{
-    console.log(emailForRemoval)
-   // const indexForRemovedEl = allInfo.indexOf(allInfo.find(({email})=> email == emailForRemoval))
-    // console.log(indexForRemovedEl)
-    let temp = allInfo.filter(el => el.email != emailForRemoval)
-    console.log(temp)
-    setInfo(temp)
-  }
+  // const [userInfo,setUserInfo] = useState({})
+  // const getForm =(info)=>{
+  //   info.id = allInfo.length
+  //   allInfo.find(({email})=> email == info.email)? alert("this email already taken, please choose another"):console.log("works ")
+  //   if(allInfo.find(({email})=> email == info.email))return 1
+  //   setUserInfo(info)
+  //   setInfo([...allInfo,info])
+  //   return 0
+  // }
+
+  // const deleteElmByEmail =(emailForRemoval)=>{
+  //   console.log(emailForRemoval)
+  //  // const indexForRemovedEl = allInfo.indexOf(allInfo.find(({email})=> email == emailForRemoval))
+  //   // console.log(indexForRemovedEl)
+  //   let temp = allInfo.filter(el => el.email != emailForRemoval)
+  //   console.log(temp)
+  //   setInfo(temp)
+  // }
    
   // useEffect(()=>{setInfo(allInfo.filter((el)=>{return el!={}}))},[userInfo])
-  useEffect(()=>{returnInfo(allInfo)},[allInfo])
-
-  console.log(allInfo)
+  // useEffect(()=>{returnInfo(allInfo)},[allInfo])
   return (
     <div className="App">
-      <Adduser getForm = {getForm} id={allInfo.length}/>
-      <UserPlaceholder Users = {allInfo}  delt = {deleteElmByEmail}/>
+      <Adduser />
+      <UserPlaceholder />
 
-      <button onClick={()=>{navigate('/logIn')}}>logInTest</button>
+      <button onClick={()=>{dispatch(logOut())}}>logInTest</button>
       
     </div>
   );

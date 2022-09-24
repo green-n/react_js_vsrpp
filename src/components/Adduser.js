@@ -1,14 +1,16 @@
 
 import { useEffect, useState } from 'react'
 import { Button } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import {addUserInfo} from '../redux/actions'
 
 const style = {
     inputStyle:'bg-gray-50 w-{150px}  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500'
 }
 
-const Adduser = ({getForm},id) => {
+const Adduser = () => {
     const [userInfo,setInfo] = useState({})
-    const [prevState,setPrevState] = useState({})
+    const dispatch = useDispatch()
     const [clear, setClean] = useState(false)
     
     const submition =(e)=>{
@@ -23,7 +25,7 @@ const Adduser = ({getForm},id) => {
         return 0}
         
         
-        getForm(userInfo);
+        dispatch(addUserInfo(userInfo));
         cleanForm()
         setInfo({})
         

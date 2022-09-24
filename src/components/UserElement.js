@@ -1,18 +1,18 @@
 import React from 'react'
 import { Button } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { deleteElmByEmail } from '../redux/actions'
 
-export const UserElement = ({User,delt,id}) => {
-  console.log(User.email)
-  const deteteElement =()=>{
-    delt(User.email)
-  } 
-    console.log(User)
+export const UserElement = ({User,id}) => {
+  const dispatch = useDispatch()
+ 
+
     let res = `id: ${id}; Username: ${User.userName}; password: ${User.password}; email: ${User.email}.`
-    console.log(delt)
+
   return (
     <>
     <h2>{res}</h2>
-    <Button variant="outlined" color ="error" onClick={deteteElement}>Delete</Button>
+    <Button variant="outlined" color ="error" onClick={()=>dispatch(deleteElmByEmail(User.email))}>Delete</Button>
     </>
 
   )

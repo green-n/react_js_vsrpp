@@ -5,10 +5,11 @@ import LogIn from './pages/LogIn';
 import Register from './pages/Register';
 import {Routes,Link, Navigate, Route} from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import TestPanel from './components/testPanel';
 
 function App() {
   const isNotLoged = !useSelector(state => state.isLogedIn)
-
+  const isPanelShown = useSelector(state => state.isTestPanelShown)
 
   // const getStateFromComponent = (state,propState) =>{
   //   setState(state)
@@ -17,6 +18,7 @@ function App() {
   //   setLogInfo(false)
   // }
   return (<>
+      {isPanelShown ? <TestPanel /> : ""}
       <Routes>
         <Route exact path="/" element = { isNotLoged ? <Navigate to="/logIn"/> : <UserManagementPage /> } />
         <Route path ='/logIn' element={<LogIn />}/>

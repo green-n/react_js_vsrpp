@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Stack } from '@mui/system'
 import { useNavigate  } from "react-router-dom";
 import { useDispatch,useSelector } from 'react-redux'
-import { logIn,addUserInfo } from '../redux/actions'
+import { logIn,addUserInfo,setThisUser } from '../redux/actions'
 
 
 const style = {
@@ -42,6 +42,7 @@ const Register = () => {
         // tempState = [...tempState,logInfo]
         // returnInfo(tempState)
         dispatch(addUserInfo(logInfo))
+        dispatch(setThisUser(logInfo))
         dispatch(logIn())
         navigate('/')
 

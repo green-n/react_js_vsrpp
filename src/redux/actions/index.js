@@ -16,10 +16,30 @@ export const addUserInfo = (info) =>{
         info: info
     }
 }
+
 export const deleteElmByEmail = (emailForRemoval) =>{
     return {
         type:'REMOVE_USER_INFO',
         emailForRemoval: emailForRemoval
+    }
+}
+
+export const showTestPanel = () =>{
+    return{
+        type:'SHOW_TEST_PANEL'
+    }
+}
+
+export const hideTestPanel = () =>{
+    return{
+        type:'HIDE_TEST_PANEL'
+    }
+}
+
+export const setThisUser = (user) =>{
+    return{
+        type:'SET_THIS_USER_AS_LOGED_IN',
+        user: user
     }
 }
 

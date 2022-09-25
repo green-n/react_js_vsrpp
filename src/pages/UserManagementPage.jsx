@@ -4,10 +4,26 @@ import UserPlaceholder from '../components/UserPlaceholder';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux'
-import { logOut } from '../redux/actions'
+import { logOut,showTestPanel } from '../redux/actions'
 
 function UserManagementPage({returnInfo,state}) {
   const dispatch = useDispatch();
+ 
+
+  return (
+    <div className="App">
+      <Adduser />
+      <UserPlaceholder />
+      <div>
+      <button onClick={()=>{dispatch(showTestPanel())}}> activate test panel</button>
+      </div>
+    </div>
+  );
+}
+
+
+
+
 
   // let navigate = useNavigate();
   // const allInfo = useSelector(state => state.userInfo)
@@ -35,22 +51,6 @@ function UserManagementPage({returnInfo,state}) {
    
   // useEffect(()=>{setInfo(allInfo.filter((el)=>{return el!={}}))},[userInfo])
   // useEffect(()=>{returnInfo(allInfo)},[allInfo])
-  return (
-    <div className="App">
-      <Adduser />
-      <UserPlaceholder />
-
-      <button onClick={()=>{dispatch(logOut())}}>logInTest</button>
-      
-    </div>
-  );
-}
-
-
-
-
-
-
 
 
 

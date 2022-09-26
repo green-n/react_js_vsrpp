@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Stack } from '@mui/system'
 import { useNavigate  } from "react-router-dom";
 import { useDispatch,useSelector } from 'react-redux'
-import { logIn,addUserInfo,setThisUser } from '../redux/actions'
+import { logIn,addUserInfo,setThisUser,addNewUserCount } from '../redux/actions'
 
 
 const style = {
@@ -18,6 +18,7 @@ const Register = () => {
     const [logInfo,setInfo] = useState({})
     const [clear,clean] = useState(false)
     let tempState = useSelector(state => state.userInfo);
+    let indx = useSelector(state => state.userCount);
     let navigate = useNavigate();
 
    
@@ -41,6 +42,8 @@ const Register = () => {
 
         // tempState = [...tempState,logInfo]
         // returnInfo(tempState)
+        setInfo(Object.assign(logInfo,{id:indx}))
+        dispatch(addNewUserCount())
         dispatch(addUserInfo(logInfo))
         dispatch(setThisUser(logInfo))
         dispatch(logIn())

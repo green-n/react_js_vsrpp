@@ -43,3 +43,9 @@ export const setThisUser = (user) =>{
     }
 }
 
+export const addNewUserCount = () => {
+    return {
+        type: 'INCREMENT_USER_COUNT'
+    }
+}
+

@@ -18,7 +18,7 @@ function App() {
   //   setLogInfo(false)
   // }
   return (<>
-      {isPanelShown ? <TestPanel /> : ""}
+      <TestPanel />
       <Routes>
         <Route exact path="/" element = { isNotLoged ? <Navigate to="/logIn"/> : <UserManagementPage /> } />
         <Route path ='/logIn' element={<LogIn />}/>

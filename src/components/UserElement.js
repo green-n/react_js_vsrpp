@@ -7,7 +7,7 @@ export const UserElement = ({User,id}) => {
   const dispatch = useDispatch()
  
 
-    let res = `id: ${id}; Username: ${User.userName}; password: ${User.password}; email: ${User.email}.`
+    let res = `element ${id}: id:${User.id} ; Username: ${User.userName}; password: ${User.password}; email: ${User.email}.`
 
   return (
     <>

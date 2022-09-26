@@ -14,9 +14,9 @@ function UserManagementPage({returnInfo,state}) {
     <div className="App">
       <Adduser />
       <UserPlaceholder />
-      <div>
+      {/* <div>
       <button onClick={()=>{dispatch(showTestPanel())}}> activate test panel</button>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -37,8 +37,7 @@ const Register = () => {
         
         if(!logInfo.userName){alert("please enter username")
         return 0}
-        if(!logInfo.password){alert("please enter password")
-        return 0}
+       
 
         // tempState = [...tempState,logInfo]
         // returnInfo(tempState)

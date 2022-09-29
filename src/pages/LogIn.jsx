@@ -7,6 +7,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import { logIn,setThisUser } from '../redux/actions'
 
 
+
 const style = {
     FormLogIn:'mx-auto text-center left-[45vw] top-[20vh] absolute max-w-[20vw] justify-center ',
     StackClass:'bg-slate-50',
@@ -36,19 +37,19 @@ const LogIn = () => {
     const loggining =()=>{
         let temp = state.find(({email})=> email == logInfo.email)
 
-        if(temp == undefined){
-            alert("this email doesn't exist")
-            return 2
-        }
+        // if(temp == undefined){
+        //     alert("this email doesn't exist")
+        //     return 2
+        // }
 
         
-        console.log(temp)
-        if(temp.password != logInfo.password){
-            alert("wrong password")
-            return 1
-        }
+        // console.log(temp)
+        // if(temp.password != logInfo.password){
+        //     alert("wrong password")
+        //     return 1
+        // }
         
-            dispatch(setThisUser(temp))
+            dispatch(setThisUser(logInfo))
             dispatch(logIn())
             navigate('/')
             return 0

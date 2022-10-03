@@ -3,16 +3,19 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import LogIn from './pages/LogIn';
 import Register from './pages/Register';
-import {Routes,Link, Navigate, Route} from 'react-router-dom'
+import {Routes,Link, Navigate, Route, Await} from 'react-router-dom'
 import { db } from "./firebase";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { query, collection, getDocs, where,orderBy } from "firebase/firestore";
 import TestPanel from './components/testPanel';
+import { setStateToInfoFromDb } from './redux/actions';
+
 
  function  App() {
   const isNotLoged = !useSelector(state => state.isLogedIn)
   // const isPanelShown = useSelector(state => state.isTestPanelShown)
   const [dbData,setDbData] = useState([])
+  const dispatch = useDispatch()
   // const q = query(collection(db, "users"),orderBy('timestamp'))
   // const doc = await getDocs(q);
 
@@ -26,10 +29,22 @@ import TestPanel from './components/testPanel';
   const getDataFromDb = async () =>{
      const q = query(collection(db, "users"),orderBy('id'))
      const doc = await getDocs(q);
-     console.log(doc.docs[0].data())
+     let tempnfo = []
+     doc.docs.map(info =>tempnfo = [...tempnfo,info.data()])
+     return tempnfo
   }
-  getDataFromDb()
+  
+  useEffect(()=>{
+     
+     const fentchData = async ()=>{
+       let temp = []
+       temp = await getDataFromDb()
+       console.log(temp)
+       dispatch(setStateToInfoFromDb(temp))
+     }
+     fentchData()
 
+  },[])
   return (<>
       <TestPanel />
       <Routes>

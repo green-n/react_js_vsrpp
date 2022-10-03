@@ -49,3 +49,10 @@ export const addNewUserCount = () => {
     }
 }
 
+export const setStateToInfoFromDb = (info) => {
+    return {
+        type: 'SET_USERS_TO_STATE_FROM_DB',
+        info: info
+    }
+}
+

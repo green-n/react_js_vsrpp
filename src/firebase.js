@@ -26,9 +26,11 @@ const db = getFirestore(app);
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log(auth)
+      return 0
     } catch (err) {
       console.error(err);
-      alert(err.message);
+      alert("User not found");
+      return 1
     }
   };
 
@@ -44,10 +46,28 @@ const db = getFirestore(app);
         authProvider: "local",
         email,
       });
+      return 0
     } catch (err) {
       console.error(err);
       alert(err.message);
+      return 1
     }
   };
 
-  export {logInWithEmailAndPassword, registerWithEmailAndPassword, db }
+  const addPlebsToBase = async (info) => {
+    try{
+      console.log(info)
+      let {id, userName, email, password} = info
+      await addDoc(collection(db,"plebs"),{
+        name: userName,
+        email,
+        password
+      })
+    }
+    catch(err){
+      console.log(err)
+      alert("somthing wrong With adding users" + err)
+    }
+  }
+
+  export {logInWithEmailAndPassword, registerWithEmailAndPassword, db, addPlebsToBase }

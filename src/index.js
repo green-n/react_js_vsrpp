@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import allReducers from './redux/reducers'
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const store = createStore(
   allReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(thunk)
 )
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

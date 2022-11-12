@@ -27,10 +27,15 @@ import { setStateToInfoFromDb } from './redux/actions';
   // }
 
   const getDataFromDb = async () =>{
-     const q = query(collection(db, "users"),orderBy('id'))
+     const q = query(collection(db, "plebs"),orderBy('email'))
      const doc = await getDocs(q);
      let tempnfo = []
-     doc.docs.map(info =>tempnfo = [...tempnfo,info.data()])
+     doc.docs.map(info =>{
+      let tempData = info.data()
+      tempData.id = info.id
+
+      tempnfo = [...tempnfo,tempData]})
+     console.log(tempnfo)
      return tempnfo
   }
   

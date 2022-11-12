@@ -10,7 +10,7 @@ const allReducers = combineReducers({
     userInfo: usesrInfoReduser,
     isTestPanelShown: testPanelShowReducer,
     setLogedUser:setLogedUserReducer,
-    userCount: userCountReducer
+    userCount: userCountReducer,
 })
 
 export default allReducers;

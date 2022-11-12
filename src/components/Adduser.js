@@ -2,7 +2,9 @@
 import { useEffect, useState } from 'react'
 import { Button } from '@mui/material'
 import { useDispatch,useSelector } from 'react-redux'
-import {addUserInfo,addNewUserCount} from '../redux/actions'
+import {addUserInfo,addNewUserCount,updateUserInfo} from '../redux/actions'
+import { addPlebsToBase } from '../firebase'
+import { fetchDataPlebsFromDb } from '../redux/actions/asyncActions'
 
 
 const style = {
@@ -28,8 +30,11 @@ const Adduser = () => {
         return 0}
         
         setInfo(Object.assign(userInfo,{id:indx}))
-        dispatch(addNewUserCount())
-        dispatch(addUserInfo(userInfo));
+        // dispatch(addNewUserCount())
+        // dispatch(addUserInfo(userInfo));
+        
+        addPlebsToBase(userInfo)
+        dispatch(fetchDataPlebsFromDb())
         cleanForm()
         setInfo({})
         

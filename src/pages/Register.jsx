@@ -5,6 +5,7 @@ import { Stack } from '@mui/system'
 import { useNavigate  } from "react-router-dom";
 import { useDispatch,useSelector } from 'react-redux'
 import { logIn,addUserInfo,setThisUser,addNewUserCount } from '../redux/actions'
+import { registerWithEmailAndPassword } from '../firebase';
 
 
 const style = {
@@ -13,7 +14,7 @@ const style = {
 
 }
 
-const Register = () => {
+const Register =  () => {
     const dispatch = useDispatch()
     const [logInfo,setInfo] = useState({})
     const [clear,clean] = useState(false)
@@ -23,7 +24,7 @@ const Register = () => {
 
    
 
-    const returnNewUser = (e) =>{
+    const returnNewUser = async (e) =>{
         e.preventDefault();
 
         if(!logInfo.email){alert("please enter email")
@@ -42,11 +43,15 @@ const Register = () => {
         // tempState = [...tempState,logInfo]
         // returnInfo(tempState)
         setInfo(Object.assign(logInfo,{id:indx}))
-        dispatch(addNewUserCount())
-        dispatch(addUserInfo(logInfo))
-        dispatch(setThisUser(logInfo))
-        dispatch(logIn())
+        let tempDoc = await registerWithEmailAndPassword(logInfo)
+        console.log(tempDoc)
+        // dispatch(addNewUserCount())
+        // dispatch(addUserInfo(logInfo))
+        // dispatch(setThisUser(logInfo))
+        if(tempDoc == 0){
         navigate('/')
+        dispatch(logIn())
+    }
 
 
        

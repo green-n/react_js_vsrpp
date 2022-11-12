@@ -17,10 +17,10 @@ export const addUserInfo = (info) =>{
     }
 }
 
-export const deleteElmByEmail = (emailForRemoval) =>{
+export const deleteElmById = (id) =>{
     return {
         type:'REMOVE_USER_INFO',
-        emailForRemoval: emailForRemoval
+        id: id
     }
 }
 
@@ -49,7 +49,15 @@ export const addNewUserCount = () => {
     }
 }
 
+
 export const setStateToInfoFromDb = (info) => {
+    return {
+        type: 'SET_USERS_TO_STATE_FROM_DB',
+        info: info
+    }
+}
+
+export const getPlebsFromDb = (info) => {
     return {
         type: 'SET_USERS_TO_STATE_FROM_DB',
         info: info

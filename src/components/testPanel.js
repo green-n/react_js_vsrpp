@@ -7,7 +7,8 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
+import { addPlebsToBase } from '../firebase'
+import { fetchDataPlebsFromDb } from '../redux/actions/asyncActions'
 
 
 const TestPanel = () => {
@@ -18,37 +19,23 @@ const TestPanel = () => {
     const indx = useSelector(state => state.userCount)
     const [userNum,setNum] = useState( 1 )
 
+
     const addNewDefaultUser = () => {
+        console.log(Users)
+        ша(Users.find(obj => {obj.name == userNum})==false){
+            console.log("name intersept")  
+        }
         const newDefaulUser = {
             userName: userNum.toString(),
             password: userNum.toString(),
             email: userNum.toString()+"email.com",
-            id: indx
         }
-        dispatch(addNewUserCount())
-        dispatch(addUserInfo(newDefaulUser))
+        addPlebsToBase(newDefaulUser)
+        dispatch(fetchDataPlebsFromDb())
         setNum(userNum + 1)
 
     }
-    const deleteAllUsersExeptCurentOne = () => {
-        let counter = 0
-        while(Users[counter]){
-            if(counter != Users.indexOf(Users.find(({email})=> email == curUsers.email))){
-                // console.log(Users[counter])
-                dispatch(deleteElmByEmail(Users[counter].email))
-            }
-            counter++
-        }
-        if(curUsers.userName == 1){
-            setNum(2)
-            return 0
-        }
-        if(curUsers.userName != 1){
-            setNum(1)
-            return 0
-        }
 
-    }
   return (
     <div>
         <AppBar position='static'>
@@ -56,7 +43,6 @@ const TestPanel = () => {
                 <Button color="inherit" onClick={()=>navigate('/register')}> test register </Button>
                 <Button color="inherit" onClick={()=>dispatch(logOut())}  > test log in </Button>
                 <Button color="inherit" onClick={()=>addNewDefaultUser()}  > add new default user </Button>
-                <Button color="inherit" onClick={()=>deleteAllUsersExeptCurentOne()}  > Delete all users exept current one </Button>
             </Toolbar>
         </AppBar>
         {/* <div>

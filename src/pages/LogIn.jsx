@@ -5,6 +5,7 @@ import { Stack } from '@mui/system'
 import { Link,useNavigate } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { logIn,setThisUser } from '../redux/actions'
+import { logInWithEmailAndPassword } from '../firebase'
 
 
 
@@ -34,7 +35,7 @@ const LogIn = () => {
         setInfo(Object.assign(logInfo,{[name]:value}))
     }
 
-    const loggining =()=>{
+    const loggining = async () => {
         let temp = state.find(({email})=> email == logInfo.email)
 
         // if(temp == undefined){
@@ -48,11 +49,16 @@ const LogIn = () => {
         //     alert("wrong password")
         //     return 1
         // }
-        
+            let tempDoc = await logInWithEmailAndPassword(logInfo.email, logInfo.password)
+          if(tempDoc == 0 ){  
+            console.log(tempDoc)
             dispatch(setThisUser(logInfo))
             dispatch(logIn())
             navigate('/')
             return 0
+        }
+       
+          
         
     }
   return (

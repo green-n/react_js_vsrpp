@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,GoogleAuthProvider} from "firebase/auth"
+import {getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,GoogleAuthProvider,signInWithRedirect,signInWithPopup} from "firebase/auth"
 import { getFirestore,query,getDocs,collection,where,addDoc} from "firebase/firestore";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,6 +22,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+// const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 
  const logInWithEmailAndPassword = async (email, password) => {
     try {
@@ -70,4 +72,20 @@ const db = getFirestore(app);
     }
   }
 
-  export {logInWithEmailAndPassword, registerWithEmailAndPassword, db, addPlebsToBase }
+//   const googleSingin = () => {
+//     const provider = new GoogleAuthProvider();
+//     signInWithRedirect(auth,provider);
+// }
+
+const googleProvider = new GoogleAuthProvider();
+const signInWithGoogle = async () => {
+  try {
+    const res = await signInWithPopup(auth, googleProvider);
+    const user = res.user;
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+  export {logInWithEmailAndPassword, registerWithEmailAndPassword, db, addPlebsToBase, signInWithGoogle }

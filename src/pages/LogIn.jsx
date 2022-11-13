@@ -6,6 +6,8 @@ import { Link,useNavigate } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { logIn,setThisUser } from '../redux/actions'
 import { logInWithEmailAndPassword } from '../firebase'
+import GoogleButton from 'react-google-button'
+import { signInWithGoogle } from '../firebase'
 
 
 
@@ -88,7 +90,8 @@ const LogIn = () => {
             </form>
         </div>
         
-        <p className={style.TextStyle}>Dont have account?<Link to="/register" className={style.LinkStyle}> Register...</Link></p>
+        <p className={style.TextStyle}>Dont have account?<Link to="/register" className={style.LinkStyle}> Register...</Link> </p>
+
     </>
   )
 }

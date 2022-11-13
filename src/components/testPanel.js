@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { hideTestPanel,logOut,addUserInfo,deleteElmByEmail,addNewUserCount } from '../redux/actions'
-import { Button } from '@mui/material'
+import { Button,TextField } from '@mui/material'
 import {useNavigate} from 'react-router-dom'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,6 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { addPlebsToBase } from '../firebase'
 import { fetchDataPlebsFromDb } from '../redux/actions/asyncActions'
+import { setFilter } from '../redux/actions'
 
 
 const TestPanel = () => {
@@ -20,20 +21,27 @@ const TestPanel = () => {
     const [userNum,setNum] = useState( 1 )
 
 
-    const addNewDefaultUser = () => {
+    const addNewDefaultUser = (num) => {
         console.log(Users)
-        ша(Users.find(obj => {obj.name == userNum})==false){
-            console.log("name intersept")  
+        if(Users.find(obj => obj.name == num.toString())){
+            console.log(num)
+            addNewDefaultUser(num + 1)
         }
-        const newDefaulUser = {
-            userName: userNum.toString(),
-            password: userNum.toString(),
-            email: userNum.toString()+"email.com",
-        }
-        addPlebsToBase(newDefaulUser)
-        dispatch(fetchDataPlebsFromDb())
-        setNum(userNum + 1)
+        else{
+            const newDefaulUser = {
+                userName: num.toString(),
+                password: num.toString(),
+                email: num.toString()+"email.com",
+            }
+            addPlebsToBase(newDefaulUser)
+            dispatch(fetchDataPlebsFromDb())
+            return 0
+    }
+    }
 
+    const handleSearchChange =(e)=>{
+        const {name,value} = e.target
+        dispatch(setFilter(value))
     }
 
   return (
@@ -41,8 +49,10 @@ const TestPanel = () => {
         <AppBar position='static'>
             <Toolbar variant="dense">
                 <Button color="inherit" onClick={()=>navigate('/register')}> test register </Button>
-                <Button color="inherit" onClick={()=>dispatch(logOut())}  > test log in </Button>
-                <Button color="inherit" onClick={()=>addNewDefaultUser()}  > add new default user </Button>
+                <Button color="inherit" onClick={()=>{dispatch(logOut())
+                navigate('/')}}  > test log in </Button>
+                <Button color="inherit" onClick={()=>addNewDefaultUser(1)}  > add new default user </Button>
+                <TextField id="outlined-basic" label="email or name" size="small" margin='dense' variant="outlined" onChange={handleSearchChange}/>
             </Toolbar>
         </AppBar>
         {/* <div>

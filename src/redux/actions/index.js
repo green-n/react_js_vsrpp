@@ -64,3 +64,10 @@ export const getPlebsFromDb = (info) => {
     }
 }
 
+export const setFilter = (info) =>{
+    return {
+        type: 'SET_FILTER',
+        info: info
+    }
+}
+
